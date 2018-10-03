@@ -1,0 +1,54 @@
+elements_file = open('elements1_20.txt', 'r')
+elements_file.seek(0)
+elements_line = elements_file.readline().strip().lower()         
+#personal note: strip  only for .readline() singular
+elements_list = []
+#if use of  for loop to delete all elements_lines[-1] (=elements_file.readlineS()), we delete all \n and the 'm' of Calcium
+while elements_line: 
+    elements_list.append(elements_line)               
+    #no need for elements_line[:-1]  because we strip()
+    elements_line = elements_file.readline().strip().lower()
+
+input_list = []
+#Create get_names() Function to collect input of 5 unique element names
+def get_names():    
+    input_list = []
+    print("list any 5 of the first 20 elements in the Period table")
+    user_input = input("Enter the name of an element: ")
+    
+    while len(input_list) < 5:                                   
+        if user_input == "":
+            user_input = input("Enter the name of an element: ")
+        elif user_input.lower() in input_list:
+            print(user_input.lower(), "was already in the list")
+            user_input = input("Enter the name of an element: ")
+        else:
+            input_list.append(user_input.lower())               
+            # .append( .lower()) for list  =!  += for strings
+            if len(input_list) == 5:                            
+                # to avoid asking a 6th input (although not recording it)
+                break
+            else:
+                user_input = input("Enter the name of an element: ")
+    return input_list
+
+def element_quiz():
+    get_names()
+    correct_answers = []
+    incorrect_answers = []
+    count_index = 0
+    for data in input_list:
+        if input_list[count_index] in elements_list == True:
+            correct_answers.append(input_list[count_index])
+            count_index += 1
+        else:
+            incorrect_answers.append(input_list[count_index])
+            count_index += 1
+    score = len(correct_answers)*20
+    return score
+element_quiz()
+
+print("Score: ",score, "% correct")
+print("Correct answers: ", correct_answers, end = "")
+print("\n")
+print("Incorrect answers: ", incorrect_answers, end = "")
