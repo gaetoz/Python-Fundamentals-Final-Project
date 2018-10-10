@@ -1,3 +1,6 @@
+//something wrong with the file - to be updated
+
+
 elements_file = open('elements1_20.txt', 'r')
 elements_file.seek(0)
 elements_line = elements_file.readline().strip().lower()         
